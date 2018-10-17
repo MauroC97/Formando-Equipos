@@ -32,6 +32,32 @@ public class Lista_Respuestas {
 	
 	public void encontrar_equipo() {
 		
+		int i,j,k;
+		int apariciones;
+		String comb_respuestas;
+		Equipo eq_act;
+		for(i=this.preguntas;i>0;i--)
+		{
+			for(j=1;j<this.colaboradores;j++)
+			{
+				comb_respuestas=this.respuestas[j-1].substring(0, i-1);
+				apariciones=1;
+				if(!comb_respuestas.equals(max_afinidad.resp_en_comun))
+				{
+					for (k=j;k<this.colaboradores;k++)
+					{
+						if(comb_respuestas.equals(this.respuestas[k-1]))
+						apariciones++;
+					}
+				}
+				if(apariciones>1)//una sola persona no es equipo
+				{
+					eq_act= new Equipo(comb_respuestas,apariciones);
+					this.max_afinidad= (this.max_afinidad.afinidad>eq_act.afinidad)?this.max_afinidad:eq_act;
+					
+				}
+			}
+		}
 		
 	}
 	
